@@ -1,7 +1,7 @@
 from typing import List, Union
 from semantic_router.encoder.base import DenseEncoder
 from sentence_transformers import SentenceTransformer
-from numpy import ndarray
+
 from semantic_router.embedding.vector import EmbeddingVector
 
 

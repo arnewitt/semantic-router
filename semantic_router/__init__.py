@@ -1,9 +1,11 @@
 from typing import Optional, List, Any
 from semantic_router.encoder.base import DenseEncoder
 from semantic_router.embedding.vector import EmbeddingVector
+
 __all__ = [
     "DenseEncoder",
 ]
+
 
 class AutoEncoder:
 
