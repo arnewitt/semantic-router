@@ -1,6 +1,7 @@
-from typing import List, Optional, Any
+from typing import List, Any
 from pydantic import BaseModel, Field
 from semantic_router.embedding.vector import EmbeddingVector
+
 
 class DenseEncoder(BaseModel):
     """
@@ -12,9 +13,17 @@ class DenseEncoder(BaseModel):
     Dense vectors are useful for tasks like similarity search, clustering, and classification,
         because they capture the semantic content of the input in a numerical form.
     """
-    name: str
-    threshold: Optional[float] = None
-    type: str = Field(default="dense-base")
+
+    name: str = Field(
+        default="dense_encoder",
+        description="The name of the dense encoder. This is used to identify the encoder in logs and configurations.",
+    )
+
+    def _initialize(self):
+        """
+        Initializes the encoder. This method should be implemented by subclasses to set up any necessary resources.
+        """
+        raise NotImplementedError("This method should be implemented by subclasses.")
 
     def encode(self, inputs: List[Any]) -> List[EmbeddingVector]:
         """
