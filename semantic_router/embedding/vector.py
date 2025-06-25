@@ -111,22 +111,64 @@ class EmbeddingVector:
 
     @classmethod
     def mean(cls, vectors: Iterable["EmbeddingVector"]) -> "EmbeddingVector":
+        """
+        Compute the mean EmbeddingVector from a list of EmbeddingVectors.
+
+        Args:
+            vectors: A list of EmbeddingVector objects.
+
+        Returns:
+            A new EmbeddingVector object representing the mean of the input vectors.
+        """
         vecs = [v.vector for v in vectors]
         return cls(np.mean(vecs, axis=0))
 
     @classmethod
     def stack(cls, vectors: Iterable["EmbeddingVector"]) -> np.ndarray:
+        """
+        Stacks multiple EmbeddingVector instances into a single numpy array.
+
+        Args:
+            vectors: An iterable of EmbeddingVector instances.
+        Returns:
+            A numpy array containing the stacked vectors.
+        """
+
         return np.vstack([v.vector for v in vectors])
 
     def is_zero(self, tol: float = 1e-12) -> bool:
+        """
+        Check if the vector is close to zero in all dimensions.
+        The tolerance guards against spurious non-zero flags caused by floating-point noise,
+        caused by numerical precision issues, loading after quantization, or other factors.
+
+        Args:
+            tol (float, optional): Tolerance for checking if the vector is zero. Defaults to 1e-12.
+        Returns:
+            bool: True if the vector is close to zero, False otherwise.
+        """
         return np.linalg.norm(self.vector) < tol
 
     def clip(self, min_val: float, max_val: float) -> "EmbeddingVector":
+        """
+        Clips the values in the embedding vector to the specified range.
+
+        Args:
+            min_val (float): The minimum value to clip to.
+            max_val (float): The maximum value to clip to.
+
+        Returns:
+            EmbeddingVector: A new EmbeddingVector with the clipped values.
+        """
+
         return EmbeddingVector(np.clip(self.vector, min_val, max_val))
 
     def normalize(self) -> np.ndarray:
         """
         Returns a normalized (unit length) version of the vector.
+
+        Returns:
+            np.ndarray: A normalized version of the vector, with a magnitude of 1.
         """
         norm = np.linalg.norm(self.vector)
         if norm == 0:
