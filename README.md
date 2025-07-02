@@ -14,6 +14,8 @@ Execute `pytest` with `python -m pytest`
 
 Execute `flake8`with `flake8 . --exclude=.venv`
 
+## Example
+
 ```python
 from semantic_router.encoder import HuggingFaceEncoder
 from semantic_router.router import SemanticRouter, Route
