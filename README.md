@@ -51,12 +51,21 @@ for r in result:
     pprint(f"{r}")
 ```
 
+## Demo FastAPI Web Server
+
+A minimal FastAPI application (`server.py`) is included to showcase how the router can be exposed as a web service.
+
+### Purpose
+* Illustrates how to load a single encoder once at startup and share it across requests.
+* Provides two endpoints to route either a single query (`/route`) or many queries in one call (`/route/batch`).
+* Keeps the code-path small and dependency footprint light so you can extend it for your own needs.
+
+### Running the server
+```bash
+# from the project root
+uv run example_server.py
+```
+
 ## todos
 - add embeddings for
-    - image
-        - transformers powered models
-- add REST-API server
-    - routes
-    - request schemas
-- add tests
-- remove .gitkeep files that are not needed
+    - images

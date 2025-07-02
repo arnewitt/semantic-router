@@ -1,0 +1,18 @@
+meta {
+  name: Encode
+  type: http
+  seq: 1
+}
+
+post {
+  url: 0.0.0.0:8081/route
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "query": "I think it is snowing outside...",
+    "top_k": 2
+  }
+}
