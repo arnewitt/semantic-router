@@ -14,11 +14,43 @@ Execute `pytest` with `python -m pytest`
 
 Execute `flake8`with `flake8 . --exclude=.venv`
 
+```python
+from semantic_router.encoder import HuggingFaceEncoder
+from semantic_router.router import SemanticRouter, Route
+from pprint import pprint
+
+encoder = HuggingFaceEncoder()
+
+routes = [
+    Route(
+        name="joke",
+        description="A route to tell a light-hearted or funny joke.",
+        examples=[
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "What do you call fake spaghetti? An impasta.",
+        ],
+    ),
+    Route(
+        name="weather",
+        description="A route to talk about the weather and forecasts.",
+        examples=[
+            "What's the weather like today?",
+            "Is it going to rain tomorrow?",
+        ],
+    ),
+]
+
+router = SemanticRouter(encoder=encoder, routes=routes, top_k=2)
+
+result = router.route("I think it is snowing outside...")
+
+
+for r in result:
+    pprint(f"{r}")
+```
 
 ## todos
 - add embeddings for
-    - text
-        - sentence-transformer powered models
     - image
         - transformers powered models
 - add REST-API server
